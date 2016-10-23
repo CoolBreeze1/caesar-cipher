@@ -14,7 +14,13 @@ def caesar_cipher(message , number)
 #
   letters = ('a'..'z').to_a
   key = Hash[letters.zip(letters.rotate(number))]
-  message.each_char.inject("") { |newtext, char| newtext + "" + key[char] }
+  message.each_char.inject("") do |newtext, char|
+    if letters.include?(char)
+      newtext + key[char]
+    else
+      newtext += char
+    end
+  end
 end
 
 puts caesar_cipher(message, number)
